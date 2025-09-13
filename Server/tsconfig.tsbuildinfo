@@ -1,0 +1,1 @@
+{"root":["./src/index.ts","./src/controller/auth.controller.ts","./src/controller/onboarding.controller.ts","./src/db/dbconnect.ts","./src/db/models/organization.ts","./src/db/models/recruitermodal.ts","./src/middlewares/auth.middleware.ts","./src/routes/auth.route.ts","./src/routes/onboarding.route.ts"],"version":"5.9.2"}
