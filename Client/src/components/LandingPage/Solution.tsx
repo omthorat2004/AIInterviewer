@@ -1,4 +1,3 @@
-import React from 'react';
 import { CheckCircle, Zap, Brain, Target } from 'lucide-react';
 
 export const Solution = () => {

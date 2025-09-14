@@ -1,4 +1,3 @@
-import React from 'react';
 import { Check, Zap, Crown, ArrowRight } from 'lucide-react';
 
 export const Pricing = () => {
