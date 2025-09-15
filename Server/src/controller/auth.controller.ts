@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import Recruiter, { IRecruiter } from "../db/modal/RecruiterModal";
+import Recruiter, { IRecruiter } from "../db/models/RecruiterModal";
 
 const JWT_KEY = process.env.JWT_SECRET || "supersecretkey";
 
