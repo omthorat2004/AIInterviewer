@@ -6,6 +6,13 @@ import FormTextarea from '../ui/FormTextarea';
 import CheckboxGroup from '../ui/CheckboxGroup';
 import FileUpload from '../ui/FileUpload';
 
+type DefaultsFields =
+  | "default_timezone"
+  | "languages"
+  | "ai_name"
+  | "logo_url"
+  | "intro_text";
+
 interface DefaultsCustomizationStepProps {
   formData: {
     default_timezone: string;
@@ -14,9 +21,10 @@ interface DefaultsCustomizationStepProps {
     logo_url: string;
     intro_text: string;
   };
-  updateFormData: (field: string, value: string | string[]) => void;
-  handleCheckboxChange: (field: 'interview_types' | 'languages', value: string) => void;
+  updateFormData: (field: DefaultsFields, value: string | string[]) => void;
+  handleCheckboxChange: (field: "interview_types" | "languages", value: string) => void;
 }
+
 
 const DefaultsCustomizationStep: React.FC<DefaultsCustomizationStepProps> = ({
   formData,

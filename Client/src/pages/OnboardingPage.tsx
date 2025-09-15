@@ -4,6 +4,25 @@ import NavigationButtons from "../components/OnboardingPage/ui/NavigationButtons
 import CompanyInformationStep from "../components/OnboardingPage/steps/CompanyInformationStep";
 import InterviewPreferencesStep from "../components/OnboardingPage/steps/InterviewPreferencesStep";
 import DefaultsCustomizationStep from "../components/OnboardingPage/steps/DefaultsCustomizationStep";
+import { saveOrganizationInfo } from "../services/onboarding.service";
+
+type SizeOptions = "Small" | "Medium" | "Large";
+type IntegrationOptions = "Google Meet" | "Zoom" | "MS Teams";
+
+interface OnboardingFormData {
+  name: string;
+  industry: string;
+  size: SizeOptions;
+  hq_location: string;
+  interview_types: string[];
+  integration_preference: IntegrationOptions;
+  default_timezone: string;
+  languages: string[];
+  ai_name: string;
+  logo_url: string;
+  intro_text: string;
+}
+
 
 type CompanyFields = "name" | "industry" | "size" | "hq_location";
 type DefaultsFields =
@@ -34,21 +53,23 @@ type UpdateFormData = (
 
 const OnboardingForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState<OnboardingData>({
-    name: "",
-    industry: "",
-    size: "",
-    hq_location: "",
-    interview_types: [],
-    integration_preference: "",
-    default_timezone: "",
-    languages: [],
-    ai_name: "",
-    logo_url: "",
-    intro_text: "",
-  });
+  const [formData, setFormData] = useState<OnboardingFormData>({
+  name: "",
+  industry: "",
+  size: "Small", 
+  hq_location: "",
+  interview_types: [],
+  integration_preference: "Google Meet", 
+  default_timezone: "",
+  languages: [],
+  ai_name: "",
+  logo_url: "",
+  intro_text: "",
+});
+
 
   const totalSteps = 3;
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const updateFormData: UpdateFormData = (field, value) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -77,14 +98,41 @@ const OnboardingForm: React.FC = () => {
     }
   };
 
-  const handleSubmit = () => {
-    console.log("Onboarding data:", formData);
-    alert("Onboarding completed! Redirecting to dashboard...");
-  };
+const handleSubmit = async () => {
+  setIsSubmitting(true);
+  try {
+    const payload = {
+      name: formData.name,
+      size: formData.size,
+      industry: formData.industry,
+      hqLocation: formData.hq_location,
+      primaryInterviewTypes: formData.interview_types,
+      integrationPreferences: formData.integration_preference,
+      defaultTimezone: formData.default_timezone,
+      defaultLanguages: formData.languages,
+      aiName: formData.ai_name,
+      logoUrl: formData.logo_url,
+      introText: formData.intro_text,
+    };
+
+    const response = await saveOrganizationInfo(payload);
+    console.log("Organization saved:", response.organization);
+    alert("Onboarding completed!");
+    // Redirect to dashboard or next step
+    window.location.href = "/dashboard";
+  } catch (error) {
+    console.error("Onboarding submit failed:", error);
+    alert("Failed to save organization info.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   const handleSkip = () => {
     console.log("User skipped onboarding");
     alert("Skipping onboarding. Redirecting to dashboard...");
+    // Redirect logic here
   };
 
   const updateCompanyInfo = (field: CompanyFields, value: string) => {
@@ -92,8 +140,12 @@ const OnboardingForm: React.FC = () => {
   };
 
   const updateDefaults = (field: DefaultsFields, value: string | string[]) => {
-    updateFormData(field, value);
-  };
+  setFormData((prev) => ({
+    ...prev,
+    [field]: value,
+  }));
+};
+
 
   const renderStep = () => {
     switch (currentStep) {
@@ -141,6 +193,7 @@ const OnboardingForm: React.FC = () => {
             onSkip={handleSkip}
             onSubmit={handleSubmit}
             isLastStep={currentStep === totalSteps - 1}
+            isSubmitting={isSubmitting}
           />
         </div>
 

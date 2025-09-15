@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import LoadingSpinner from './LoadinSpinner'
+import LoadingSpinner from './LoadingSpinner';  
 
 interface NavigationButtonsProps {
   currentStep: number;
@@ -10,7 +10,7 @@ interface NavigationButtonsProps {
   onSkip?: () => void;
   onSubmit?: () => void;
   isLastStep: boolean;
-  isLoading?: boolean;
+  isSubmitting: boolean;
 }
 
 const NavigationButtons: React.FC<NavigationButtonsProps> = ({
@@ -20,7 +20,7 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
   onSkip,
   onSubmit,
   isLastStep,
-  isLoading = false
+  isSubmitting,
 }) => {
   return (
     <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-200">
@@ -50,16 +50,16 @@ const NavigationButtons: React.FC<NavigationButtonsProps> = ({
         {isLastStep ? (
           <button
             onClick={onSubmit}
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="px-8 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center space-x-2"
           >
-            {isLoading && <LoadingSpinner size="sm" className="border-t-white" />}
-            <span>{isLoading ? 'Saving...' : 'Continue to Dashboard'}</span>
+            {isSubmitting && <LoadingSpinner size="sm" className="border-t-white" />}
+            <span>{isSubmitting ? 'Saving...' : 'Continue to Dashboard'}</span>
           </button>
         ) : (
           <button
             onClick={onNext}
-            disabled={isLoading}
+            disabled={isSubmitting}
             className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <span>Next</span>
