@@ -3,12 +3,25 @@ import { Users } from 'lucide-react';
 import CheckboxGroup from '../ui/CheckboxGroup';
 import RadioGroup from '../ui/RadioGroup';
 
+interface OnboardingData {
+  name: string;
+  industry: string;
+  size: string;
+  hq_location: string;
+  interview_types: string[];
+  integration_preference: string;
+  default_timezone: string;
+  languages: string[];
+  ai_name: string;
+  logo_url: string;
+  intro_text: string;
+}
+
+type UpdateFormData = (field: keyof OnboardingData, value: string | string[]) => void;
+
 interface InterviewPreferencesStepProps {
-  formData: {
-    interview_types: string[];
-    integration_preference: string;
-  };
-  updateFormData: (field: string, value: any) => void;
+  formData: Pick<OnboardingData, 'interview_types' | 'integration_preference'>;
+  updateFormData: UpdateFormData;
   handleCheckboxChange: (field: 'interview_types' | 'languages', value: string) => void;
 }
 

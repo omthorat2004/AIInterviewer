@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
-import ProgressBar from '../components/OnboardingPage/ui/ProgressBar';
-import NavigationButtons from '../components/OnboardingPage/ui/NavigationButtons';
-import CompanyInformationStep from '../components/OnboardingPage/steps/CompanyInformationStep';
-import InterviewPreferencesStep from '../components/OnboardingPage/steps/InterviewPreferencesStep';
-import DefaultsCustomizationStep from '../components/OnboardingPage/steps/DefaultsCustomizationStep';
+import React, { useState } from "react";
+import ProgressBar from "../components/OnboardingPage/ui/ProgressBar";
+import NavigationButtons from "../components/OnboardingPage/ui/NavigationButtons";
+import CompanyInformationStep from "../components/OnboardingPage/steps/CompanyInformationStep";
+import InterviewPreferencesStep from "../components/OnboardingPage/steps/InterviewPreferencesStep";
+import DefaultsCustomizationStep from "../components/OnboardingPage/steps/DefaultsCustomizationStep";
+
+type CompanyFields = "name" | "industry" | "size" | "hq_location";
+type DefaultsFields =
+  | "default_timezone"
+  | "languages"
+  | "ai_name"
+  | "logo_url"
+  | "intro_text";
 
 interface OnboardingData {
   name: string;
@@ -19,32 +27,40 @@ interface OnboardingData {
   intro_text: string;
 }
 
+type UpdateFormData = (
+  field: keyof OnboardingData,
+  value: string | string[]
+) => void;
+
 const OnboardingForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState<OnboardingData>({
-    name: '',
-    industry: '',
-    size: '',
-    hq_location: '',
+    name: "",
+    industry: "",
+    size: "",
+    hq_location: "",
     interview_types: [],
-    integration_preference: '',
-    default_timezone: '',
+    integration_preference: "",
+    default_timezone: "",
     languages: [],
-    ai_name: '',
-    logo_url: '',
-    intro_text: ''
+    ai_name: "",
+    logo_url: "",
+    intro_text: "",
   });
 
   const totalSteps = 3;
 
-  const updateFormData = (field: keyof OnboardingData, value: any) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+  const updateFormData: UpdateFormData = (field, value) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleCheckboxChange = (field: 'interview_types' | 'languages', value: string) => {
-    const currentValues = formData[field] as string[];
+  const handleCheckboxChange = (
+    field: "interview_types" | "languages",
+    value: string
+  ) => {
+    const currentValues = formData[field];
     const updatedValues = currentValues.includes(value)
-      ? currentValues.filter(item => item !== value)
+      ? currentValues.filter((item) => item !== value)
       : [...currentValues, value];
     updateFormData(field, updatedValues);
   };
@@ -62,13 +78,21 @@ const OnboardingForm: React.FC = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Onboarding data:', formData);
-    alert('Onboarding completed! Redirecting to dashboard...');
+    console.log("Onboarding data:", formData);
+    alert("Onboarding completed! Redirecting to dashboard...");
   };
 
   const handleSkip = () => {
-    console.log('User skipped onboarding');
-    alert('Skipping onboarding. Redirecting to dashboard...');
+    console.log("User skipped onboarding");
+    alert("Skipping onboarding. Redirecting to dashboard...");
+  };
+
+  const updateCompanyInfo = (field: CompanyFields, value: string) => {
+    updateFormData(field, value);
+  };
+
+  const updateDefaults = (field: DefaultsFields, value: string | string[]) => {
+    updateFormData(field, value);
   };
 
   const renderStep = () => {
@@ -77,7 +101,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <CompanyInformationStep
             formData={formData}
-            updateFormData={updateFormData}
+            updateFormData={updateCompanyInfo}
           />
         );
       case 1:
@@ -92,7 +116,7 @@ const OnboardingForm: React.FC = () => {
         return (
           <DefaultsCustomizationStep
             formData={formData}
-            updateFormData={updateFormData}
+            updateFormData={updateDefaults}
             handleCheckboxChange={handleCheckboxChange}
           />
         );
@@ -122,7 +146,8 @@ const OnboardingForm: React.FC = () => {
 
         <div className="text-center mt-6">
           <p className="text-sm text-gray-500">
-            Powered by <span className="text-indigo-600 font-medium">CareerBoost AI</span>
+            Powered by{" "}
+            <span className="text-indigo-600 font-medium">CareerBoost AI</span>
           </p>
         </div>
       </div>

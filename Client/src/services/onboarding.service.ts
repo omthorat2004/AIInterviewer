@@ -1,4 +1,3 @@
-// src/services/onboarding.service.ts
 import api from './api';
 
 // Data types

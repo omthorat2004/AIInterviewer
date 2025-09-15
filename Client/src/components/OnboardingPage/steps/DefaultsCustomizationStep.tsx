@@ -14,7 +14,7 @@ interface DefaultsCustomizationStepProps {
     logo_url: string;
     intro_text: string;
   };
-  updateFormData: (field: string, value: any) => void;
+  updateFormData: (field: string, value: string | string[]) => void;
   handleCheckboxChange: (field: 'interview_types' | 'languages', value: string) => void;
 }
 
@@ -102,4 +102,4 @@ const DefaultsCustomizationStep: React.FC<DefaultsCustomizationStepProps> = ({
   );
 };
 
-export default DefaultsCustomizationStep;
+export default DefaultsCustomizationStep; 

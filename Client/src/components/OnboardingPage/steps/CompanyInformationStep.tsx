@@ -3,6 +3,10 @@ import { Building2 } from 'lucide-react';
 import FormInput from '../ui/FormInput';
 import FormSelect from '../ui/FormSelect';
 
+
+type CompanyFields = 'name' | 'industry' | 'size' | 'hq_location';
+
+
 interface CompanyInformationStepProps {
   formData: {
     name: string;
@@ -10,7 +14,7 @@ interface CompanyInformationStepProps {
     size: string;
     hq_location: string;
   };
-  updateFormData: (field: string, value: string) => void;
+  updateFormData: (field: CompanyFields, value: string) => void;
 }
 
 const CompanyInformationStep: React.FC<CompanyInformationStepProps> = ({
