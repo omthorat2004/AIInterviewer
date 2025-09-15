@@ -3,10 +3,7 @@ import express from 'express';
 import connectDB from './db/dbConnect';
 import authRouter from './routes/auth.route';
 
-
-
 require('dotenv').config()
-
 
 const PORT = process.env.PORT||3000
 
