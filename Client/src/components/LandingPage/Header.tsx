@@ -11,6 +11,14 @@ export const Header = () => {
     { name: 'FAQ', href: '#faq' }
   ];
 
+  const handleSignIn = () => {
+    window.location.href = '/login';  // Redirect to login page
+  };
+
+  const handleGetStarted = () => {
+    window.location.href = '/signup';  // Redirect to signup page
+  };
+
   return (
     <header className="fixed top-0 w-full bg-white/95 backdrop-blur-sm border-b border-gray-200 z-50">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,10 +46,16 @@ export const Header = () => {
 
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center gap-4">
-            <button className="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200">
+            <button
+              onClick={handleSignIn}
+              className="text-gray-600 hover:text-blue-600 font-medium transition-colors duration-200"
+            >
               Sign In
             </button>
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105">
+            <button
+              onClick={handleGetStarted}
+              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105"
+            >
               Get Started
             </button>
           </div>
@@ -73,11 +87,19 @@ export const Header = () => {
                   {item.name}
                 </a>
               ))}
+
               <div className="flex flex-col gap-3 pt-3 border-t border-gray-200">
-                <button className="text-gray-600 hover:text-blue-600 font-medium px-3 py-2 rounded-lg transition-colors duration-200 text-left">
+                <button
+                  onClick={handleSignIn}
+                  className="text-gray-600 hover:text-blue-600 font-medium px-3 py-2 rounded-lg transition-colors duration-200 text-left"
+                >
                   Sign In
                 </button>
-                <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300">
+
+                <button
+                  onClick={handleGetStarted}
+                  className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300"
+                >
                   Get Started
                 </button>
               </div>
