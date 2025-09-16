@@ -3,6 +3,7 @@ import express from 'express';
 import connectDB from './db/dbConnect';
 import authRouter from './routes/auth.route';
 import onboardingRouter from './routes/onboarding.route';
+import interviewRouter from './routes/interview.route'
 
 require('dotenv').config()
 
@@ -14,6 +15,7 @@ app.use(cors())
 app.use(express.json())
 app.use('/recruiter',authRouter)
 app.use('/api', onboardingRouter);
+app.use('/interview',interviewRouter)
 
 connectDB()
 
