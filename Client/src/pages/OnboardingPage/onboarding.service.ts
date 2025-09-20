@@ -12,5 +12,5 @@ export interface OnboardingData {
 }
 
 export const submitOrganization = (data: OnboardingData) => {
-  return axiosInstance.post("/org", data);
+  return axiosInstance.post("/api/org", data);
 };

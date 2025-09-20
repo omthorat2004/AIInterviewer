@@ -106,7 +106,7 @@ const Header: React.FC = () => {
 
                     <Link
 
-                        to="/signin"
+                        to="/signup"
 
                         className="text-gray-600 hover:text-blue-600 font-medium"
                     >
@@ -116,7 +116,7 @@ const Header: React.FC = () => {
 
                     <Link
 
-                        to="/get-started"
+                        to="/login"
 
                         className="px-6 py-2 rounded-lg font-semibold text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-transform hover:scale-105"
                     >

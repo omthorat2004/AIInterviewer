@@ -49,7 +49,7 @@ const RecruiterSchema = new mongoose_1.Schema({
         interviewTypes: [
             { type: String, enum: ["HR", "Technical", "Mock", "Live-normal"] },
         ],
-        integration: { type: String, enum: ["google"], default: "google" },
+        integration: { type: String, enum: ["Google", "Slack", "Jira", "Trello", "Asana"], default: "Google" },
         timezone: { type: String },
         languages: [{ type: String }],
     },
