@@ -66,7 +66,7 @@ const OnboardingPage: React.FC = () => {
           Welcome, {user?.name}
         </h1>
         <p className="text-center text-gray-600 mb-8">
-          Let’s set up your organization to get started 🚀
+          Let's set up your organization to get started 🚀
         </p>
 
         <form
@@ -145,8 +145,8 @@ const OnboardingPage: React.FC = () => {
                         primaryInterviewTypes: checked
                           ? [...prev.primaryInterviewTypes, type]
                           : prev.primaryInterviewTypes.filter(
-                              (t) => t !== type
-                            ),
+                            (t) => t !== type
+                          ),
                       }));
                     }}
                     className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"

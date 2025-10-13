@@ -18,6 +18,7 @@ const FinalCTA: React.FC = () => {
     { icon: FaShieldAlt, text: "Bank-level security" },
 
     { icon: FaStar, text: "No credit card required" }
+
   ];
 
   return (
@@ -51,6 +52,7 @@ const FinalCTA: React.FC = () => {
         <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-2xl mx-auto">
 
           Don't let another opportunity pass you by. Join thousands of
+
           professionals who have transformed their careers with AI.
 
         </p>
@@ -74,6 +76,7 @@ const FinalCTA: React.FC = () => {
         <div className="grid sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
 
           {
+
             trust.map(({ icon: Icon, text }, item) => (
 
               <div
@@ -81,6 +84,7 @@ const FinalCTA: React.FC = () => {
                 key={item}
 
                 className="flex items-center justify-center gap-2 text-white/80"
+
               >
 
                 <Icon className="w-5 h-5" />
@@ -88,7 +92,9 @@ const FinalCTA: React.FC = () => {
                 <span className="text-sm">{text}</span>
 
               </div>
+
             ))
+
           }
 
         </div>
@@ -96,6 +102,7 @@ const FinalCTA: React.FC = () => {
       </div>
 
     </section>
+
   );
 };
 

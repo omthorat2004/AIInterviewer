@@ -140,8 +140,9 @@ const Hero: React.FC = () => {
                 <div className="absolute w-64 h-64 bg-purple-200 rounded-full opacity-30 blur-xl animate-pulse top-3/4 right-1/4 mix-blend-multiply animation-delay-2000" />
 
             </div>
-            
+
         </section>
+
     );
 };
 
